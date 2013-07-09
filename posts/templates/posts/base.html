@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>{% block title %}Django News{% endblock %}</title>
+        <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" media="screen">
+</head> 
+<body style="margin-top:50px">
+  <header><h1>Django News</h1></header>
+<div >
+{% block content %}{% endblock %}
+</div>
+</body>
+</html>

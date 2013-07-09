@@ -1,14 +1,15 @@
 {% extends "posts/base.html" %}
 
 {% block content %}
-{% for post in posts %}
 <div>
 	<a href="{% url posts.views.details post.pk %}"><h3>{{ post.title }}</h3></a>
 	{% if post.link %}
 	<a href="{{ post.link }}"> {{ post.link }}</a><br/>
 	{% endif %}
 	<p> Submitted on {{ post.date }} by {{ post.user }} </p>
+	{% if post.text %}
+	<div>{{ post.text }}<div>
+	{% endif %}
 	<a href="">Upvote</a>/<a href="">Downvote</a>
 </div>
-{% endfor %}
 {% endblock %}
