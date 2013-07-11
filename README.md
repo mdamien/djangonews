@@ -29,3 +29,8 @@ You need to add a local_settings.py file in djangonews with GITHUB_APP_ID & GITH
 - calculation of scores are really inefficient, caching them would be better
 - pagination of the index
 - ordering comments by score
+
+##Screenshots
+
+![home](http://i.imgur.com/2tqL3Wl.png "")
+![post & comments](http://i.imgur.com/K0CaweA.png "")
