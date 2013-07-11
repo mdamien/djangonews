@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from mptt.models import MPTTModel, TreeForeignKey
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -25,3 +26,27 @@ class Vote(models.Model):
 
     def __unicode__(self):
         return "%s upvoted %s" % (self.voter.username, self.post.title)
+
+
+class Comment(MPTTModel):
+    """ Threaded comments for posts """
+    post = models.ForeignKey(Post)
+    author = models.ForeignKey(User)
+    comment = models.TextField()
+    date  = models.DateTimeField(auto_now_add=True)
+    # a link to comment that is being replied, if one exists
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by=['date']
+
+    def __unicode__(self):
+        return "%s comment on %s" % (self.author.username, self.post)
+
+class CommentVote(models.Model):
+    voter = models.ForeignKey(User)
+    comment = models.ForeignKey(Comment)
+    upvote = models.BooleanField()
+
+    def __unicode__(self):
+        return "%s upvoted %s" % (self.voter.username, self.comment)
