@@ -1,13 +1,27 @@
+{% load staticfiles %}
+
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8"> 
         <title>{% block title %}Django News{% endblock %}</title>
-        <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen">
 </head> 
 <body style="margin-top:50px">
-  <header><h1>Django News</h1></header>
-<div >
+<div class="container">
+<div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'posts.views.submit' %}">Submit</a></li>
+            <li class="active"><a href="#">Deconnect</a></li>
+          {% else %}
+            <li class="active"><a href="#">Login</a></li>
+          {% endif %}
+        </ul>
+        <h3 class="muted"><a href="{% url 'posts.views.index' %}">Django News</a></h3>TODO: Comments-django-mptt
+ / Github auth -django-socialauth
+      </div>
+  <hr>
 {% block content %}{% endblock %}
 </div>
 </body>

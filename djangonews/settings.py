@@ -124,10 +124,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #'social_auth',
+
     'django.contrib.admin',
     'django.contrib.admindocs',
 
     'posts'
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.contrib.github.GithubBackend',
 )
 
 # A sample logging configuration. The only tangible logging

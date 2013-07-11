@@ -2,13 +2,8 @@
 
 {% block content %}
 {% for post in posts %}
-<div>
-	<a href="{% url posts.views.details post.pk %}"><h3>{{ post.title }}</h3></a>
-	{% if post.link %}
-	<a href="{{ post.link }}"> {{ post.link }}</a><br/>
-	{% endif %}
-	<p> Submitted on {{ post.date }} by {{ post.user }} </p>
-	<a href="">Upvote</a>/<a href="">Downvote</a>
-</div>
+<ul>
+	<li>{% include "posts/post.html" with post=post%}</li>
+</ul>
 {% endfor %}
 {% endblock %}
