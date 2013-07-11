@@ -9,7 +9,8 @@ urlpatterns = patterns('',
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	url(r'^admin/', include(admin.site.urls)),
 	(r'^comments/', include('django.contrib.comments.urls')),
-	#url(r'', include('social_auth.urls')),
+	url(r'', include('social_auth.urls')),
+	url(r'^logout/$', 'django.contrib.auth.views.logout', { 'next_page':"/" }),
 )
 
 urlpatterns += patterns('',

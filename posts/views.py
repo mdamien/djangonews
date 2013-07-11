@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, render_to_response, redi
 from django.contrib.auth.decorators import login_required
 from posts.models import *
 from django.forms import ModelForm
+from django import forms
 
 #import pdb; pdb.set_trace()
 
@@ -39,20 +40,46 @@ def submit(request):
 		formset = SubmitForm()
 	return render(request,"posts/submit.html", {"formset": formset,})
 
-#TODO: POST requests with CRSF
-@login_required
-def upvote(request,id):
+def vote(request,id,upvote):
 	post = Post.objects.get(pk=id)
-	vote = Vote(voter=request.user,post=post,upvote=True)
-	vote.save()
+	vote = Vote.objects.filter(post=post,voter=request.user) #permits admin-mass-voting
+	if vote:
+		vote = vote[0]
+		vote.upvote = upvote
+		vote.save()
+	else:
+		vote = Vote(voter=request.user,post=post,upvote=upvote)
+		vote.save()
 	return redirect(post)
 
 @login_required
+def upvote(request,id):
+	return vote(request,id,True)
+
+@login_required
 def downvote(request,id):
-	post = Post.objects.get(pk=id)
-	vote = Vote(voter=request.user,post=post,upvote=False)
-	vote.save()
+	return vote(request,id,False)
+
+def comment_vote(request,post_id,node_id,upvote):
+	post = Post.objects.get(pk=post_id)
+	comment = Comment.objects.get(pk=node_id)
+	vote = CommentVote.objects.filter(voter=request.user,comment=comment) #permits admin-mass-voting
+	if vote:
+		vote = vote[0]
+		vote.upvote = upvote
+		vote.save()
+	else:
+		vote = CommentVote(voter=request.user,comment=comment,upvote=upvote)
+		vote.save()
 	return redirect(post)
+
+@login_required
+def comment_downvote(request,post_id,node_id):
+	return comment_vote(request,post_id,node_id,False)
+
+@login_required
+def comment_upvote(request,post_id,node_id):
+	return comment_vote(request,post_id,node_id,True)
 
 @login_required
 def comment_reply(request,post_id,parent_id):
@@ -70,4 +97,6 @@ def comment_reply(request,post_id,parent_id):
 		if parent_id != "0":
 			comment.parent = Comment.objects.get(pk=parent_id)
 		formset = CommentReplyForm(instance=comment)
+	formset.fields['post'].widget = forms.HiddenInput()
+	formset.fields['parent'].widget = forms.HiddenInput()
 	return render(request,"posts/comment_reply.html", {"formset": formset,})

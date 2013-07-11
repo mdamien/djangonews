@@ -37,6 +37,9 @@ class Comment(MPTTModel):
     # a link to comment that is being replied, if one exists
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
+    def score(self):
+        return CommentVote.objects.filter(comment=self,upvote=True).count() - CommentVote.objects.filter(comment=self,upvote=False).count()
+
     class MPTTMeta:
         order_insertion_by=['date']
 

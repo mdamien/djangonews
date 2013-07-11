@@ -2,8 +2,8 @@
 
 {% block content %}
 {% for post in posts %}
-<ul>
-	<li>{% include "posts/post.html" with post=post%}</li>
-</ul>
+<div>
+{% include "posts/post.html" with post=post%}
+</div>
 {% endfor %}
 {% endblock %}

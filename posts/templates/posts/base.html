@@ -13,14 +13,14 @@
 <div class="masthead">
         <ul class="nav nav-pills pull-right">
           {% if user.is_authenticated %}
+            <li><a>Logged as {{user}}</a></li>
             <li><a href="{% url 'posts.views.submit' %}">Submit</a></li>
-            <li class="active"><a href="#">Deconnect</a></li>
+            <li class="active"><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
           {% else %}
-            <li class="active"><a href="#">Login</a></li>
+            <li class="active"><a href="{% url 'socialauth_begin' 'github' %}">Login with GitHub</a></li>
           {% endif %}
         </ul>
-        <h3 class="muted"><a href="{% url 'posts.views.index' %}">Django News</a></h3>TODO: Comments-django-mptt
- / Github auth -django-socialauth
+        <h3 class="muted"><a href="{% url 'posts.views.index' %}">Django News</a></h3>
       </div>
   <hr>
 {% block content %}{% endblock %}

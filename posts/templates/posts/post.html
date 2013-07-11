@@ -1,8 +1,8 @@
 <div class="post">
-	<a href="{% url 'posts.views.upvote' post.pk %}"><i class="icon-chevron-up"></i></a>
+	<h4><a href="{% url 'posts.views.upvote' post.pk %}"><i class="icon-chevron-up"></i></a>
 	&nbsp;{{ post.score }}&nbsp;
-	<a href="{% url 'posts.views.downvote' post.pk %}"><i class="icon-chevron-down"></i></a>
-	<a href="{% url 'posts.views.details' post.pk %}"><h4>{{ post.title }}</h4></a>
+	<a href="{% url 'posts.views.downvote' post.pk %}"><i class="icon-chevron-down"></i></a>&nbsp;&nbsp;
+	<a href="{% url 'posts.views.details' post.pk %}">{{ post.title }}</h4></a>
 	{% if post.link %}
 	<a href="{{ post.link }}"> {{ post.link }}</a><br/>
 	{% endif %}
