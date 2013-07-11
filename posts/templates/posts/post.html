@@ -6,5 +6,9 @@
 	{% if post.link %}
 	<a href="{{ post.link }}"> {{ post.link }}</a><br/>
 	{% endif %}
-	<p> Submitted on {{ post.date }} by {{ post.user }} </p>
+	<p> Submitted on {{ post.date }} by {{ post.user }} | 
+		{% with total=post.comments_count %}
+		{{ total }} comment{{ total|pluralize }}
+		{% endwith %}
+	</p>
 </div>

@@ -13,6 +13,9 @@ class Post(models.Model):
     def score(self):
         return Vote.objects.filter(post=self,upvote=True).count() - Vote.objects.filter(post=self,upvote=False).count()
 
+    def comments_count(self):
+        return Comment.objects.filter(post=self).count()
+
     def get_absolute_url(self):
         return reverse('posts.views.details', args=[str(self.pk)])
 
