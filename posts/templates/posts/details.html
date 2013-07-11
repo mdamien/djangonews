@@ -8,5 +8,19 @@
 	{% endif %}
 </div>
 <h4>Comments</h4>
+{% load mptt_tags %}
+{% recursetree comments %}
+    <div class="comment" style="margin-left: {{ node.get_level }}0px">
+        <h6>{{ node.author }} on {{ node.date }}</h6>
+        <div>{{ node.comment|linebreaks }}</div>
+        {% if user.is_authenticated %}<a href="{% url 'posts.views.comment_reply' post.pk node.pk %}">Reply</a>{% endif %}
+    </div>
+    {% if not node.is_leaf_node %}
+        {{ children }}
+    {% endif %}
+{% endrecursetree %}
+{% if user.is_authenticated %}
+<a href="{% url 'posts.views.comment_reply' post.pk 0 %}"> Comment </a>
+{% endif %}
 
 {% endblock %}
