@@ -1,24 +1,31 @@
-== Installation ==
+# Django News
+*A hackernews clone built in django for fun*
 
-Use a venv with django 1.5  
-pip install django-social-auth  
-clone django-mptt && python setup.py install  
+Complete with:
 
-put a local_settings.py in djangonews  with:
-MEDIA_ROOT 
-STATIC_ROOT
-SECRET_KEY
-GITHUB_APP_ID
-GITHUB_API_SECRET
+- Post & Comments scores
+- Threaded comments
+- GitHub login
 
-Github keys by registering an application (even a localhost:8000 one)
+## Installation
 
-python-sqlite3  
+You need to have:
+- Django 1.5
+- django-social-auth (for GitHub login)
+- django-mptt (for threaded comments)
+- python-sqlite3
 
-#TODO: 
+Then, just do a `.manage.py runserver` as usual and go to /admin/ to connect with:  
+>login: admin  
+>password: admin  
 
-POST requests with CRSF  
-Comment/post field vote / vote by POST  
-Paging
-ordering comments by score  
-more dynamic score (depends of the time)    
+If you want the github login:  
+You need to add a local_settings.py file in djangonews with GITHUB_APP_ID & GITHUB_API_SECRET set
+
+
+###TODO
+
+- Upvotes are done with a simple GET request, it needs to be a POST request
+- calculation of scores are really inefficient, caching them would be better
+- pagination of the index
+- ordering comments by score
