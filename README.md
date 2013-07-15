@@ -7,6 +7,8 @@ Complete with:
 - Threaded comments
 - GitHub login
 
+**But it's not for production use, just for a quick demonstration**
+
 ## Installation
 
 You need to have:
