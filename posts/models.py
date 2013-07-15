@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from mptt.models import MPTTModel, TreeForeignKey
+from urlparse import urlparse
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -15,6 +16,9 @@ class Post(models.Model):
 
     def comments_count(self):
         return Comment.objects.filter(post=self).count()
+
+    def get_domain(self):
+        return urlparse(self.link).netloc
 
     def get_absolute_url(self):
         return reverse('posts.views.details', args=[str(self.pk)])

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from posts.models import *
 from django.forms import ModelForm
 from django import forms
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #import pdb; pdb.set_trace()
 
@@ -19,6 +20,14 @@ class CommentReplyForm(ModelForm):
 def index(request):
 	posts = list(Post.objects.all())
 	posts.sort(key=Post.score,reverse=True)
+	paginator = Paginator(posts, 50)
+	page = request.GET.get('p')
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = paginator.page(paginator.num_pages)
 	return render(request, 'posts/index.html', {'posts': posts})
 
 def details(request,id):

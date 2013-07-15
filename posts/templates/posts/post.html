@@ -1,14 +1,19 @@
-<div class="post">
-	<h4><a href="{% url 'posts.views.upvote' post.pk %}"><i class="icon-chevron-up"></i></a>
-	&nbsp;{{ post.score }}&nbsp;
-	<a href="{% url 'posts.views.downvote' post.pk %}"><i class="icon-chevron-down"></i></a>&nbsp;&nbsp;
-	<a href="{% url 'posts.views.details' post.pk %}">{{ post.title }}</h4></a>
+{% load humanize %} 
+
+<span class="post">
+	<a href='{% url 'posts.views.upvote' post.pk %}' class='vote' title='vote up'>vote up</a>
 	{% if post.link %}
-	<a href="{{ post.link }}"> {{ post.link }}</a><br/>
+	<a class="link" href="{{ post.link }}">{{ post.title }}</a><span class="comhead"> ({{post.get_domain}}) </span>
+	{% else %}
+	<a class="link" href="{% url 'posts.views.details' post.pk %}">{{ post.title }}</a>
 	{% endif %}
-	<p> Submitted on {{ post.date }} by {{ post.user }} | 
-		{% with total=post.comments_count %}
+	<span class="score">
+	{% with total=post.score %}
+		{{ total }} point{{ total|pluralize }}
+	{% endwith %}
+
+	</span> by {{ post.user }} {{ post.date|naturaltime}}  | <a class="comments" href="{% url 'posts.views.details' post.pk %}">
+	{% with total=post.comments_count %}
 		{{ total }} comment{{ total|pluralize }}
-		{% endwith %}
-	</p>
-</div>
+	{% endwith %}</a>
+</span>

@@ -1,0 +1,90 @@
+body {
+	margin:0;
+	font: 12px/1.4em Verdana,sans-serif;
+}
+
+#header-background {
+	background-color: rgb(55, 163, 59);
+	margin-bottom: 30px;
+}
+header,#content{
+	max-width: 70rem;
+	margin: 0px auto;
+}
+
+header {
+	height: 40px;
+	line-height: 40px;
+	padding-left: 70px;
+	padding-right: 70px;
+	clear: both;
+}
+
+header h2 a{
+	font-family: "Trebuchet MS",sans-serif;
+	color: white;
+	text-decoration: none;
+}
+nav,header h2 {
+	display: inline;
+	margin-top:20px;
+}
+nav a{
+	color: rgba(255, 255, 255, 0.95);
+	font-weight: bold;
+	text-decoration: none;
+	height: 100%;
+	margin-left:30px;
+}
+
+.pull-right {
+	float: right;
+}
+
+.post .vote {
+  text-indent: -999px;
+  overflow: hidden;
+  display: inline-block;
+  border: 5px solid transparent;
+  border-top: 0px;
+  border-bottom: 10px solid #aaa;
+  width: 0;
+  height: 0;
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.posts li {
+	margin-bottom: 7px;
+}
+
+.posts { 
+    list-style-type: none;
+}
+
+.post a {
+	text-decoration: none;
+}
+
+.post .link {
+	color: black;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.post, .post a{
+	color: #777;
+}
+
+input,textarea{
+    display:block;
+}
+
+.pagination a {
+	text-decoration: none;
+	color: #777;
+	clear: both;
+}
+
+.pagination .next {
+	float:right;
+}
