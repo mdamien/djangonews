@@ -8,24 +8,24 @@
   <link rel='stylesheet' href='{% static 'css/style.css' %}' type='text/css' media='screen'/>
 </head>
 <body>
-<div id="header-background">
-  <header>
+  <div id="header-background">
+    <header>
       <h2 class="logo"><a href="/">Django News</a></h2>
       <nav>
         {% if user.is_authenticated %}<a href="{% url 'posts.views.submit' %}">Submit</a>{% endif %}
-      <span class="pull-right">
-        {% if user.is_authenticated %}
+        <span class="pull-right">
+          {% if user.is_authenticated %}
           <a>Logged as {{user}}</a>
           <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
-        {% else %}
+          {% else %}
           <a href="{% url 'socialauth_begin' 'github' %}">Login with GitHub</a>
-         {% endif %}
+          {% endif %}
         </span>
       </nav>
-  </header>
-</div>
-<section id="content">
-{% block content %}{% endblock %}
-</div>
+    </header>
+  </div>
+  <section id="content">
+    {% block content %}{% endblock %}
+  </section>
 </body>
 </html>
