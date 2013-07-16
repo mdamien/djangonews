@@ -1,7 +1,7 @@
 {% load humanize %} 
 
 <span class="post">
-	<a href='{% url 'posts.views.upvote' post.pk %}' class='upvote' title='upvote'>vote up</a>
+	<a href='{% url 'posts.views.upvote' post.pk %}' class='upvote' title='upvote' {% if not user.is_authenticated %} onclick="alert('You need to be logged to vote')" {% endif %}>vote up</a>
 	{% if post.link %}
 	<a class="link" href="{{ post.link }}">{{ post.title }}</a><span class="comhead"> ({{post.get_domain}}) </span>
 	{% else %}
