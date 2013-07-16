@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from urlparse import urlparse
+from datetime import datetime
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -49,6 +50,11 @@ class Comment(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by=['date']
+
+    def save(self, *args, **kwargs):
+        if not self.date:
+            self.date = datetime.now()
+        super(Comment, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return "%s comment on %s" % (self.author.username, self.post)
