@@ -1,7 +1,7 @@
 # Django News
 *A hackernews clone built in django for fun*
 
-Demo at [dj.dam.io](http://dj.dam.io/)
+**Demo at [dj.dam.io](http://dj.dam.io/)**
 
 Complete with:
 
