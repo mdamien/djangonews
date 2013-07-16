@@ -1,7 +1,7 @@
 {% load humanize %} 
 
 <span class="post">
-	<a href='{% url 'posts.views.upvote' post.pk %}' class='vote' title='vote up'>vote up</a>
+	<a href='{% url 'posts.views.upvote' post.pk %}' class='upvote' title='vote up'>vote up</a>
 	{% if post.link %}
 	<a class="link" href="{{ post.link }}">{{ post.title }}</a><span class="comhead"> ({{post.get_domain}}) </span>
 	{% else %}

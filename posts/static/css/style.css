@@ -41,13 +41,26 @@ nav a{
 	float: right;
 }
 
-.post .vote {
+.upvote {
   text-indent: -999px;
   overflow: hidden;
   display: inline-block;
   border: 5px solid transparent;
   border-top: 0px;
   border-bottom: 10px solid #aaa;
+  width: 0;
+  height: 0;
+  margin-left:5px;
+  margin-right:5px;
+}
+
+.downvote {
+  text-indent: -999px;
+  overflow: hidden;
+  display: inline-block;
+  border: 5px solid transparent;
+  border-bottom: 0px;
+  border-top: 10px solid #aaa;
   width: 0;
   height: 0;
   margin-left:5px;

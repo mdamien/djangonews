@@ -13,9 +13,10 @@
 {% recursetree comments %}
     <div class="comment" style="margin-left: {{ node.get_level }}0px">
 
-        <h5><a href="{% url 'posts.views.comment_upvote' post.pk node.pk %}"><i class="icon-chevron-up"></i></a>
+        <h5>
+            <a href='{% url 'posts.views.comment_upvote' post.pk node.pk %}' class='upvote' title='upvote'>upvote</a>
     &nbsp;{{ node.score }}&nbsp;
-    <a href="{% url 'posts.views.comment_downvote' post.pk node.pk%}"><i class="icon-chevron-down"></i>
+        <a href='{% url 'posts.views.comment_downvote' post.pk node.pk%}' class='downvote' title='downvote'>downvote</a>
 
     </a>&nbsp;&nbsp;&nbsp;{{ node.author }} on {{ node.date }}</h5>
         <div>{{ node.comment|linebreaks }}</div>
